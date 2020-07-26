@@ -90,3 +90,10 @@ for item in strings:
         temp_t = sum(t, [])
         dict[item]=list(set(temp_t))
 dict
+
+new_df = pd.DataFrame()
+for key, val in zip(list(dict.keys()),list(dict.values())):
+    new_df = new_df.append({'Event' : key , 'Employees-to-recommend' : ', '.join(val)},ignore_index=True)
+new_df = new_df[['Event','Employees-to-recommend']]
+# new_df.to_csv('Test.csv',index=False)
+new_df.to_excel('Test.xlsx',index=False)
