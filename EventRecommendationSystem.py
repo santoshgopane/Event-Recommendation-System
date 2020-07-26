@@ -71,7 +71,13 @@ def prefrences(words):
                 event_list.append(event)
 #                 print('Event: ',event)
     return domain_list,event_list
-
+strings = []
+with open('Events.csv', 'r') as read_obj:
+    csv_reader = reader(read_obj)
+    for row in csv_reader:
+        strings.append(row)
+strings = strings[1:]
+strings = sum(strings, [])
 temp = []
 dict = {}
 for item in strings:
