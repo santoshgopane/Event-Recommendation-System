@@ -71,3 +71,22 @@ def prefrences(words):
                 event_list.append(event)
 #                 print('Event: ',event)
     return domain_list,event_list
+
+temp = []
+dict = {}
+for item in strings:
+    words = textPreprocessing(item)
+    pref = prefrences(words)
+    t = []
+    for D in list(set(pref[0])):
+        if pref[1]:
+            for E in list(set(pref[1])):
+                row = list(data[(data['Domain']==D)&((data['Event1']==E)|(data['Event2']==E))]['Name'])
+                t.append(row)
+        else:
+            row = list(data[(data['Domain']==D)]['Name'])
+            dict[item]=row
+    if t:
+        temp_t = sum(t, [])
+        dict[item]=list(set(temp_t))
+dict
