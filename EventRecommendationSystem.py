@@ -16,7 +16,7 @@ for domain in domains['domain']:
     Domain[domain]=domain.lower().split()
 for event in events['event']:
     Event[event]=event.lower()[:-1].split() #Removed (s)
-    
+
 Domain['Security'].append('cyber')
 Domain['Security'].append('hacking')
 Domain['Coding'].append('cod')
@@ -49,3 +49,25 @@ def textPreprocessing(data):
     removeStopwords = [word for word in words if word.lower() not in stopwords.words('english')]
     
     return removeStopwords
+
+#This function is required to give output Domain(s) and Event(s).
+def prefrences(words):
+    text = ' '.join(words)
+    i = True
+    domain_list = []
+    for domain in domains['domain']:
+        for item1 in Domain[domain]:
+            if item1 in text.lower():
+                domain_list.append(domain)
+#                 print('Domain: ',domain)
+                i = False
+    if i:
+        domain_list.append('Other')
+#         print('Domain: Other')
+    event_list = []
+    for event in events['event']:
+        for item2 in Event[event]:
+            if item2 in text.lower():
+                event_list.append(event)
+#                 print('Event: ',event)
+    return domain_list,event_list
